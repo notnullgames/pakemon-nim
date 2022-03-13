@@ -1,6 +1,5 @@
-import raylib
-import scenes
-import scenes/intro
+import lib/raylib
+import lib/scenes
 
 SetTraceLogLevel(LOG_WARNING)
 InitWindow(320, 240, "Pakémon")

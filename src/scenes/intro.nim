@@ -1,24 +1,12 @@
-import raylib
-import parallax
-import sprite
-import input
-import scenes
-import scenes/scaffold
-
-# setup initial types
-type
-  SceneIntro* = ref object of Scene
-    music: Music
-    title: Texture2D
-    titleY: float
-    layer1: ParalaxLayer
-    layer2: ParalaxLayer
-    layer3: ParalaxLayer
-    cat: Spritesheet
+import lib/raylib
+import lib/parallax
+import lib/sprite
+import lib/input
+import lib/scenes
+import std/os
 
 # do all initialization
 method load*(this:SceneIntro) =
-  echo "load SceneIntro"
   this.music = LoadMusicStream("assets/the_golden_ages.mod")
   PlayMusicStream(this.music)
   this.title = LoadTexture("assets/title.png")
@@ -34,7 +22,7 @@ method update*(this:SceneIntro, time: float) =
   # wait until the "PRESS A BUTTON" is showing
   if this.titleY >= 60.0:
     if buttonDown("a", "b", "x", "y", "start", "select"):
-      this.set_scene(SceneScaffold())
+      this.set_scene(SceneMenuTop())
 
 # called in draw loop
 method draw*(this:SceneIntro, time: float) =

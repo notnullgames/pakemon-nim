@@ -1,2 +1,7 @@
 pakemon
 .DS_Store
+games
+retroarch
+*.dylib
+*.dll
+*.so
