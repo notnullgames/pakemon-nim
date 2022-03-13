@@ -1,3 +1,7 @@
+Very light & simple game-menu for loading ROMs and minigames, on a pi with a controller, from a simple menu.
+
+![demo](./demo.gif)
+
 This uses the awesome automated [Raylib-Forever](https://github.com/Guevara-chan/Raylib-Forever)! bindings for nim.
 
 It's meant to load early on pakemon hardware, and list the other things you can run (roms, pakemon minigames, etc).
