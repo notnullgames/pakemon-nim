@@ -1,6 +1,6 @@
 This uses the awesome automated [Raylib-Forever](https://github.com/Guevara-chan/Raylib-Forever)! bindings for nim.
 
-It's meant to load early on pakemon hardware, and list the other things you can run (roms, pakemoin minigames, etc).
+It's meant to load early on pakemon hardware, and list the other things you can run (roms, pakemon minigames, etc).
 
 
 ```sh
@@ -60,26 +60,34 @@ games/
           ...
 ````
 
-`list` & `run` are just shell-scripts or programs. Write them in whatever language you want, return a newline-delimited list. An icon for a list goes in `icon.png` in the dir
+`list` & `run` are just shell-scripts or programs. Write them in whatever language you want, return a newline-delimited list on stdout. An icon for a list goes in `icon.png` in the dir
 
 where `list` looks something like this:
 
 ```
 #!/bin/sh
 
-ls roms/*.nes | sed 's/.nes//g' | sed 's/roms\///g'
+# list files without extensions or dir, very fast
+for i in ${0%/*}/roms/*.gb; do
+  i="${i%.*}"
+  echo "${i##*/}"
+done
 
 ```
 
-and run will receive the thing you returned in list, as a single arg:
+and `run` will receive the thing you chose in list, as a single arg:
 
 ```
-#!/bin/sh
+#!/bin/bash
 
-retroarch -L /path/to/libretro/core.so "roms/$1.nes"
+retroarch -L /usr/lib/x86_64-linux-gnu/libretro/cores/gambatte_libretro.so "${0%/*}/roms/${1}.gb"
 ```
 
-I will make some examples, at some point, so it should be easy to arrange your files in the correct order.
+There are some nice system icons [here](https://github.com/baxysquare/baxy-retroarch-themes/tree/master/bytheme/FlatUX/src/png/128)
 
+## TODO
 
-There are some nice icons [here](https://github.com/baxysquare/baxy-retroarch-themes/tree/master/bytheme/FlatUX/src/png/128)
+- Include example homebrew roms, icons, and make it use even less config (no scripts)
+- [use direct libretro bindings](https://github.com/RobLoach/raylib-libretro/blob/master/example/raylib-libretro-basic.c)
+- make a kind of homebrew store that can download pakemon minigames.
+
