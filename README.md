@@ -1,4 +1,4 @@
-Very light & simple game-menu for loading ROMs and minigames, on a pi with a controller, from a simple menu.
+Very light & simple game-menu for loading ROMs and minigames, on a pi with a controller, from a simple menu. Eventually this will probly replace [pakemon](https://github.com/notnullgames/pakemon).
 
 ![demo](./demo.gif)
 
