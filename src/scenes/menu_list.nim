@@ -5,8 +5,10 @@ import lib/utils
 import std/strformat
 import std/strutils
 import std/math
-from std/osproc import execProcess
 import std/os
+import std/osproc
+
+# see lib/scenes for definition
 
 # do all initialization
 method load*(this:SceneMenuList) =
@@ -31,8 +33,9 @@ method update*(this:SceneMenuList, time: float) =
   if buttonDown("down") and this.listenDown:
     this.listenDown = false
     this.currentListItem = lmod(this.currentListItem + 1, len(this.games))
-  if buttonDown("a") and this.runtime > 2:
-    discard execProcess("./run", fmt"games/{this.list}", [this.games[this.currentListItem]])
+  if buttonDown("a", "start") and this.runtime > 2:
+    this.runtime = 0
+    echo execProcess(fmt"./run '{this.games[this.currentListItem]}'", fmt"games/{this.list}")
   if buttonDown("b"):
     this.set_scene(SceneMenuTop(currentListItem:this.parentListItem ))
 

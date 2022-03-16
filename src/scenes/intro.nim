@@ -5,6 +5,8 @@ import lib/input
 import lib/scenes
 import std/os
 
+# see lib/scenes for definition
+
 # do all initialization
 method load*(this:SceneIntro) =
   this.music = LoadMusicStream("assets/the_golden_ages.mod")

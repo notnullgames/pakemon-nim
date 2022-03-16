@@ -7,6 +7,8 @@ import std/os
 import std/re
 import std/strformat
 
+# see lib/scenes for definition
+
 # do all initialization
 method load*(this:SceneMenuTop) =
   # run each list function

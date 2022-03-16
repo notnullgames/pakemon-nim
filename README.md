@@ -40,7 +40,6 @@ games/
     list
     icon.png
     roms/
-      mario.png
       mario.nes
     ...
   SNES/
@@ -48,7 +47,6 @@ games/
     list
     icon.png
     roms/
-      mario.png
       mario.smc
     ...
   Pakémon

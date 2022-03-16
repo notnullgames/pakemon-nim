@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  /Applications/RetroArch.app/Contents/MacOS/RetroArch --fullscreen -L gpsp "${0%/*}/roms/$1.gba"
+else
+  retroarch --fullscreen -L gpsp "${0%/*}/roms/$1.gba"
+fi

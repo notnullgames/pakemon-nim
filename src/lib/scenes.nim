@@ -2,8 +2,10 @@ import lib/raylib
 import lib/parallax
 import lib/sprite
 
+# all scenes are deifned here
 type
   Scene* = ref object of RootObj
+  
   SceneIntro* = ref object of Scene
     music*: Music
     title*: Texture2D
@@ -12,6 +14,7 @@ type
     layer2*: ParalaxLayer
     layer3*: ParalaxLayer
     cat*: Spritesheet
+  
   SceneMenuTop* = ref object of Scene
     lists*:seq[string]
     icons*:seq[Texture2D]
@@ -19,6 +22,7 @@ type
     listenRight*: bool
     listenLeft*: bool
     runtime*: float
+  
   SceneMenuList* = ref object of Scene
     list*: string
     currentListItem*: int

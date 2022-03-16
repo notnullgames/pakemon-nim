@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# list files without extensions or dir, very fast
+for i in ${0%/*}/games/*; do
+  echo "${i##*/}"
+done
