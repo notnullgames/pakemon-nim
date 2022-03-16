@@ -82,7 +82,7 @@ and `run` will receive the thing you chose in list, as a single arg:
 ```
 #!/bin/bash
 
-retroarch -L /usr/lib/x86_64-linux-gnu/libretro/cores/gambatte_libretro.so "${0%/*}/roms/${1}.gb"
+retroarch -L gambatte "${0%/*}/roms/${1}.gb"
 ```
 
 There are some nice system icons [here](https://github.com/baxysquare/baxy-retroarch-themes/tree/master/bytheme/FlatUX/src/png/128)
