@@ -9,10 +9,10 @@ jobs:
     strategy:
       matrix:
         include:
-        - cpu: arm
-          os: Linux
-        - cpu: arm64
-          os: Linux
+        # - cpu: arm
+        #   os: Linux
+        # - cpu: arm64
+        #   os: Linux
         - cpu: amd64
           os: Linux
         - cpu: arm64
@@ -23,7 +23,7 @@ jobs:
           os: Windows
     steps:
       - uses: actions/checkout@v2
-      - uses: numworks/setup-arm-toolchain@2020-q2
+      # - uses: numworks/setup-arm-toolchain@2020-q2
       - name: Install nim
         run: sudo apt install -y nim
       - name: Install raylib
