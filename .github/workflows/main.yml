@@ -1,0 +1,57 @@
+name: Build
+on:
+  push:
+    tags:
+    - 'v*'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+        - cpu: arm
+          os: Linux
+        - cpu: arm64
+          os: Linux
+        - cpu: amd64
+          os: Linux
+        - cpu: arm64
+          os: MacOSX
+        - cpu: amd64
+          os: MacOSX
+        - cpu: amd64
+          os: Windows
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install tools
+        run: sudo apt install -y nim raylib
+      - name: Compile nim
+        run: nim compile --path=src --opt=speed -d=release --os=${{ matrix.os }} --cpu=${{ matrix.cpu } --outdir=build/${{ matrix.os }-${{ matrix.cpu }} src/pakemon.nim
+      - name: Zip release
+        run: cd build/${{ matrix.os }}-${{ matrix.cpu }} && cp -R ../../assets ../../games . && zip -r ../../pakemon-${{ matrix.os }}-${{ matrix.cpu }}.zip .
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+      - name: Upload Release Asset
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./pakemon-${{ matrix.os }}-${{ matrix.cpu }}.zip
+          asset_name: pakemon-${{ matrix.os }}-${{ matrix.cpu }}.zip
+          asset_content_type: application/zip
+
+# avaliable cpu:
+# i386, m68k, alpha, powerpc, powerpc64, powerpc64el, sparc, vm, hppa, ia64, amd64, mips, mipsel, arm, arm64, js, nimvm, avr, msp430, sparc64, mips64, mips64el, riscv32, riscv64, esp, wasm32
+
+# avalable os:
+# DOS, Windows, OS2, Linux, MorphOS, SkyOS, Solaris, Irix, NetBSD, FreeBSD, OpenBSD, DragonFly, CROSSOS, AIX, PalmOS, QNX, Amiga, Atari, Netware, MacOS, MacOSX, iOS, Haiku, Android, VxWorks, Genode, JS, NimVM, Standalone, NintendoSwitch, FreeRTOS, Any
