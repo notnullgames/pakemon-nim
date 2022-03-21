@@ -26,7 +26,7 @@ jobs:
       - name: Install tools
         run: sudo apt install -y nim raylib
       - name: Compile nim
-        run: nim compile --path=src --opt=speed -d=release --os=${{ matrix.os }} --cpu=${{ matrix.cpu }} --outdir=build/${{ matrix.os }-${{ matrix.cpu }} src/pakemon.nim
+        run: nim compile --path=src --opt=speed -d=release --os=${{ matrix.os }} --cpu=${{ matrix.cpu }} --outdir=build/${{ matrix.os }}-${{ matrix.cpu }} src/pakemon.nim
       - name: Zip release
         run: cd build/${{ matrix.os }}-${{ matrix.cpu }} && cp -R ../../assets ../../games . && zip -r ../../pakemon-${{ matrix.os }}-${{ matrix.cpu }}.zip .
       - name: Create Release
