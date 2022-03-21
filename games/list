@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Use this to customize how files are listed
+# It's run in the system-dir
+
+# list files without extensions or dir, very fast
+for i in ${PWD%/*}/roms/*; do
+  i="${i%.*}"
+  echo "${i##*/}"
+done

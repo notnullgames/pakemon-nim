@@ -1,7 +1,0 @@
-#!/bin/bash
-
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  /Applications/RetroArch.app/Contents/MacOS/RetroArch --fullscreen -L bsnes2014_balanced "${0%/*}/roms/$1.smc"
-else
-  retroarch --fullscreen -L bsnes2014_balanced "${0%/*}/roms/$1.smc"
-fi

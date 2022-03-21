@@ -12,10 +12,17 @@ import std/strformat
 # do all initialization
 method load*(this:SceneMenuTop) =
   # run each list function
-  for lister in walkFiles("games/*/list"):
-    let name = lister.replace(re"^games/").replace(re"/list$")
-    this.lists.add(name)
-    this.icons.add(LoadTexture(fmt"games/{name}/icon.png"))
+  for lister in walkDir("games"):
+    if lister.kind == pcDir:
+      let name = lister.path.replace(re"^games/")
+      this.lists.add(name)
+      let fname = fmt"games/{name}/icon.png"
+      if existsFile(fname):
+        this.icons.add(LoadTexture(fname))
+      else:
+        this.icons.add(LoadTexture("assets/unknown_icon.png"))
+
+  this.currentListItem = 0
 
   # just handle a single directional press
   this.listenLeft = true
@@ -36,7 +43,7 @@ method update*(this:SceneMenuTop, time: float) =
     this.listenRight = false
     this.currentListItem = lmod(this.currentListItem + 1, len(this.lists))
   if buttonDown("a") and this.runtime > 2:
-    this.set_scene(SceneMenuList(list: this.lists[this.currentListItem], parentListItem: this.currentListItem ))
+    this.set_scene(SceneMenuList(list: this.lists[this.currentListItem], parentListItem: this.currentListItem, currentListItem: 0 ))
 
 # called in draw loop
 method draw*(this:SceneMenuTop, time: float) =

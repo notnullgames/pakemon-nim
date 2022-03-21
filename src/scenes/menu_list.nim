@@ -13,7 +13,7 @@ import std/osproc
 # do all initialization
 method load*(this:SceneMenuList) =
   this.currentListItem = 0
-  this.games = splitLines(strip(execProcess("./list", fmt"games/{this.list}")))
+  this.games = splitLines(strip(execProcess("../../list", fmt"games/{this.list}/roms")))
 
   # just handle a single directional press
   this.listenUp = true
@@ -35,8 +35,9 @@ method update*(this:SceneMenuList, time: float) =
     this.currentListItem = lmod(this.currentListItem + 1, len(this.games))
   if buttonDown("a", "start") and this.runtime > 2:
     this.runtime = 0
-    echo execProcess(fmt"./run '{this.games[this.currentListItem]}'", fmt"games/{this.list}")
+    echo execProcess(fmt"../run '{this.list}' '{this.games[this.currentListItem]}'", fmt"games/{this.list}")
   if buttonDown("b"):
+    this.currentListItem = 0
     this.set_scene(SceneMenuTop(currentListItem:this.parentListItem ))
 
 # called in draw loop
@@ -46,5 +47,6 @@ method draw*(this:SceneMenuList, time: float) =
   let pageStart = page * 18
   DrawRectangle(0, 10 + ((this.currentListItem mod 18) * 12), 320, 10, BLUE);
   for i in pageStart..(pageStart + 17):
-    DrawText(this.games[i], 10, 10 + ((i mod 18)*12), 8, WHITE)
+    if i < len(this.games):
+      DrawText(this.games[i], 10, 10 + ((i mod 18)*12), 8, WHITE)
 

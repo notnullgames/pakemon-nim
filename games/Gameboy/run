@@ -1,7 +1,0 @@
-#!/bin/bash
-
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  /Applications/RetroArch.app/Contents/MacOS/RetroArch --fullscreen -L gambatte "${0%/*}/roms/$1.gb"
-else
-  retroarch --fullscreen -L gambatte "${0%/*}/roms/$1.gb"
-fi

@@ -4,3 +4,4 @@ retroarch
 *.dylib
 *.dll
 *.so
+build

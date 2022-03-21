@@ -1,7 +1,0 @@
-#!/bin/sh
-
-# list files without extensions or dir, very fast
-for i in ${0%/*}/roms/*.gba; do
-  i="${i%.*}"
-  echo "${i##*/}"
-done

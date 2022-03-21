@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Use this to customize how games are run
+# First argument is system-dir second argument is rom basename
+# it's run from inside the system-dir
+
+if [ "${1}" == "Pakémon" ];then
+  exec "${1}/${2}/start"
+  return
+elif [ "${1}" == "Gameboy" ];then
+  CORE="gambatte"
+  EXTENSION="gb"
+elif [ "${1}" == "GBA" ];then
+  CORE="gpsp"
+  EXTENSION="gba"
+elif [ "${1}" == "NES" ];then
+  CORE="fceumm"
+  EXTENSION="nes"
+elif [ "${1}" == "SNES" ];then
+  CORE="bsnes2014_balanced"
+  EXTENSION="smc"
+fi
+
+RETROARCH=retroarch
+if [[ "$OSTYPE" == "darwin"* ]];then
+  RETROARCH=/Applications/RetroArch.app/Contents/MacOS/RetroArch
+fi
+
+echo "${RETROARCH}" \-\-fullscreen \-L $CORE "roms/${2}.${EXTENSION}"
+
+"${RETROARCH}" --fullscreen -L $CORE "roms/${2}.${EXTENSION}"
