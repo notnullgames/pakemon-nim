@@ -24,7 +24,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install nim
-        run: sudo apt install -y nim
+        run: sudo apt install -y nim binutils-arm-linux-gnueabihf
       - name: Install raylib
         run: wget https://github.com/raysan5/raylib/releases/download/4.0.0/raylib-4.0.0_linux_amd64.tar.gz && tar xvzf raylib-4.0.0_linux_amd64.tar.gz && sudo mv raylib-4.0.0_linux_amd64/lib/* /usr/lib && sudo mv raylib-4.0.0_linux_amd64/include/* /usr/include && sudo ldconfig
       - name: Compile pakemon
