@@ -52,6 +52,39 @@ There are some nice system icons [here](https://github.com/baxysquare/baxy-retro
 
 You can modify `games/list` and `games/run` to customize how it works.
 
+
+## install
+
+It is meant to be run on a pizero2w, but should run on others. Install "Raspberry Pi OS Lite" (32 or 64 bit should work ok) and run this to get it working:
+
+```
+# for 32bit
+wget https://github.com/nim-lang/nightlies/releases/download/latest-version-1-6/linux_armv7l.tar.xz
+
+# for 64 bit
+# wget https://github.com/nim-lang/nightlies/releases/download/latest-version-1-6/linux_arm64.tar.xz
+
+tar -xf linux_*.tar.xz
+cd nim-1.6.5/
+sudo ./install.sh /usr/local/bin
+
+sudo apt install -y git libdrm-dev libegl1-mesa-dev libgles2-mesa-dev libgbm-dev
+git clone https://github.com/raysan5/raylib.git
+cd raylib\src\
+make PLATFORM=PLATFORM_DRM RAYLIB_LIBTYPE=SHARED
+sudo make install
+
+cd ../..
+git clone https://github.com/notnullgames/pakemon-nim.git
+cd pakemon-nim
+ln -s /usr/local/lib/libraylib.so.4.0.0 libraylib.so
+nim compile --path=src --run src/pakemon.nim
+```
+
+
+Eventually, I will have CI setup to pre-builds, so you don't need raylib/git/c-stuff/nim.
+
+
 ## TODO
 
 - [use direct libretro bindings](https://github.com/RobLoach/raylib-libretro/blob/master/example/raylib-libretro-basic.c)

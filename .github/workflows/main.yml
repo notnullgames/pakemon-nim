@@ -9,18 +9,20 @@ jobs:
     strategy:
       matrix:
         include:
-        # - cpu: arm
-        #   os: Linux
-        # - cpu: arm64
-        #   os: Linux
-        - cpu: amd64
+        - cpu: arm
           os: Linux
         - cpu: arm64
-          os: MacOSX
+          os: Linux
         - cpu: amd64
-          os: MacOSX
-        - cpu: amd64
-          os: Windows
+          os: Linux
+        # - cpu: arm64
+        #   os: MacOSX
+        # - cpu: arm64
+        #   os: MacOSX
+        # - cpu: amd64
+        #   os: MacOSX
+        # - cpu: amd64
+        #   os: Windows
     steps:
       - uses: actions/checkout@v2
       # - uses: numworks/setup-arm-toolchain@2020-q2

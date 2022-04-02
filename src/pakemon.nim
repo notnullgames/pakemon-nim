@@ -6,7 +6,7 @@ InitWindow(320, 240, "Pakémon")
 InitAudioDevice()
 SetTargetFPS(60)
 
-currentScene = SceneMenuTop()
+currentScene = SceneIntro()
 currentScene.load()
 
 while not WindowShouldClose():
