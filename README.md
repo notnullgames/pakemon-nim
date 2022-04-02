@@ -82,7 +82,7 @@ nim compile --path=src --run src/pakemon.nim
 ```
 
 
-Eventually, I will have CI setup to pre-builds, so you don't need raylib/git/c-stuff/nim.
+Eventually, I will have CI setup to pre-builds (notes [here](https://github.com/nim-lang/Nim/wiki/BuildServices#8-cross-compilation-and-release), so you don't need raylib/git/c-stuff/nim.
 
 
 ## TODO
